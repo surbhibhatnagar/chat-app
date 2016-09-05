@@ -37,7 +37,7 @@ io.on('connection', function(socket){
          socket.emit('load old msgs', docs);
     });
 
-	socket.on('new user', function(data, callback){
+socket.on('new user', function(data, callback){
         if(usernames.indexOf(data) != -1)
         	callback(false);
         else
@@ -49,7 +49,7 @@ io.on('connection', function(socket){
         }
 	});
 
-    socket.on('chat message', function(data){
+socket.on('chat message', function(data){
         var newMsg = new Chat({msg: data.trim(), name: socket.name});
         newMsg.save(function(err){
               if(err) throw err;
@@ -58,7 +58,7 @@ io.on('connection', function(socket){
         });
     }); 
 
-    socket.on('disconnect', function(data){
+socket.on('disconnect', function(data){
        if(!socket.name)
            return;
        console.log( 'user  disconnected');
